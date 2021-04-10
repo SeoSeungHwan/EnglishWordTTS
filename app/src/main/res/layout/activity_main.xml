@@ -52,6 +52,7 @@
         tools:listitem="@layout/date_list_item"/>
 
     <Button
+        android:id="@+id/today_add_btn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"

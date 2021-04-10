@@ -7,7 +7,8 @@ import java.time.LocalDate
 
 @Entity
 data class DateWord(
-    @PrimaryKey val date: LocalDate,
-    @ColumnInfo(name = "words") val words: ArrayList<Word>?,
-    @ColumnInfo(name = "playCount") val playCount: Int
+    @PrimaryKey val count: Int,
+    @ColumnInfo(name = "korean") val korean: String?,
+    @ColumnInfo(name = "english") val english: String?,
+    @ColumnInfo(name="isCheck") val isCheck: Boolean?
 )

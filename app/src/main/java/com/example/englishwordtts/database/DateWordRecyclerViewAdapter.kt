@@ -32,8 +32,8 @@ class DateWordRecyclerViewAdapter(private val dataSet : ArrayList<DateWord>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.date_tv.text = dataSet[position].date.toString()
-        holder.count_tv.text = dataSet[position].words?.size.toString()
+        //holder.date_tv.text = dataSet[position].date.toString()
+        //holder.count_tv.text = dataSet[position].words?.size.toString()
 
 
     }
