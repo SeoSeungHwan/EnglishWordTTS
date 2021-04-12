@@ -1,6 +1,5 @@
 package com.example.englishwordtts.database
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +7,9 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.englishwordtts.R
-import com.example.englishwordtts.model.DateWord
-import kotlinx.android.synthetic.main.date_list_item.view.*
+import com.example.englishwordtts.model.DateList
 
-class DateWordRecyclerViewAdapter(private val dataSet : ArrayList<DateWord>) :
+class DateWordRecyclerViewAdapter(private val dataSet : ArrayList<DateList>) :
     RecyclerView.Adapter<DateWordRecyclerViewAdapter.ViewHolder>() {
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
