@@ -10,7 +10,7 @@
     android:layout_marginRight="10dp">
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/word_cb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -30,12 +30,12 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintEnd_toStartOf="@+id/wordtts_play_btn"
+        app:layout_constraintStart_toEndOf="@+id/word_cb"
         tools:layout_editor_absoluteY="21dp">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/englishname_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -45,7 +45,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/koreanname_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,7 +57,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/wordtts_play_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,16 +1,59 @@
 package com.example.englishwordtts.database
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.example.englishwordtts.model.DateAndWord
 import com.example.englishwordtts.model.DateList
+import com.example.englishwordtts.model.Word
+import java.util.*
 
 @Dao
 interface WordDao {
 
-    @Transaction
-    @Query("SELECT * FROM DateList")
-    fun getDateList() : List<DateAndWord>
 
+    /*
+    * 날짜 관련 Dao
+    * */
+    @Insert
+    fun insertDate(dateList: DateList)
+
+    @Delete
+    fun deleteDate(dateList: DateList)
+
+    @Query("SELECT * FROM dates")
+    fun getDate() : List<DateList>
+
+    @Query("SELECT * FROM dates WHERE date = :name")
+    fun getDateByName(name : String) : DateList
+
+    @Query("DELETE FROM dates WHERE date = :name")
+    fun deleteDate(name : String)
+
+    @Query("DELETE FROM dates")
+    fun clearDateList()
+
+    /*
+    * 영어단어 관련 DAO
+    * */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertWord(word : Word)
+
+    @Delete
+    fun delete(word:Word)
+
+    @Query("SELECT * FROM words WHERE parentDate =:parentDate")
+    fun getWords(parentDate : String) : List<Word>
+
+    @Query("DELETE FROM words WHERE wordId =:wordId")
+    fun deleteWord(wordId : Int)
+
+    @Query("DELETE FROM words")
+    fun clearWords()
+
+
+    /*
+    * 날짜와 영어관계 DAO
+    * */
+    @Transaction
+    @Query("SELECT * FROM dates")
+    fun getDateListAndWord() : List<DateAndWord>
 }

@@ -7,7 +7,7 @@
     tools:context=".WordList">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/wordlist_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,18 +53,18 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/englishname_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
                 android:hint="영단어"
                 android:inputType="text" />
 
             <EditText
+                android:id="@+id/koreanname_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
                 android:hint="뜻"
                 android:inputType="text" />
 

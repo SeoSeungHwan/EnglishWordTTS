@@ -1,4 +1,4 @@
-package com.example.englishwordtts.database
+package com.example.englishwordtts
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.englishwordtts.R
 import com.example.englishwordtts.model.DateList
 
 class DateWordRecyclerViewAdapter(private val dataSet : ArrayList<DateList>) :
     RecyclerView.Adapter<DateWordRecyclerViewAdapter.ViewHolder>() {
 
+    //TODO 각 날짜 클릭 시 단어장으로 이동하는 이벤트 구현
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val date_tv : TextView
         val count_tv : TextView
@@ -26,12 +26,14 @@ class DateWordRecyclerViewAdapter(private val dataSet : ArrayList<DateList>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.date_list_item,parent,false)
-        return ViewHolder(view)
+        return ViewHolder(
+            view
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //holder.date_tv.text = dataSet[position].date.toString()
-        //holder.count_tv.text = dataSet[position].words?.size.toString()
+        holder.date_tv.text = dataSet[position].date
+        holder.count_tv.text = dataSet[position].count.toString()
 
 
     }
