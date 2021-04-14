@@ -17,29 +17,30 @@ import kotlinx.coroutines.launch
 
 class WordList : AppCompatActivity() {
 
-
+    var date = ""
+    var layoutManager : LinearLayoutManager?= null
     companion object {
         private const val TAG = "Test"
     }
     private var adapter : WordRecyclerViewAdapter? = null
     private val appDataBase = AppDatabase.getInstance(this)?.getWordDao()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_list)
 
         //선택 날짜
-        var date = intent.getStringExtra("date")
+        date = intent.getStringExtra("date").toString()
         totay_date_tv.text = date
 
-
         //RecyclerView관련
-        val layoutManager = LinearLayoutManager(
+        layoutManager = LinearLayoutManager(
             this@WordList,
             RecyclerView.VERTICAL,
             false
         )
+
+
         //TODO List<Word>불러오는 것 ViewModel로 빼기
         CoroutineScope(Dispatchers.IO).launch {
             val words = date?.let { appDataBase?.getWords(it) }
@@ -47,6 +48,7 @@ class WordList : AppCompatActivity() {
             wordlist_rv.layoutManager = layoutManager
             wordlist_rv.adapter = adapter
         }
+
 
 
         //단어 추가 버튼 클릭 시 Room 데이터 베이스에 저장
@@ -63,7 +65,6 @@ class WordList : AppCompatActivity() {
                 )
                 appDataBase?.insertWord(newWord)
                 //TODO 데이터 삽입후 RecyclerView 갱신 구현
-
             }
             clearEditText()
         }
@@ -73,5 +74,7 @@ class WordList : AppCompatActivity() {
         englishname_et.text = null
         koreanname_et.text = null
     }
+
+
 
 }
