@@ -1,10 +1,7 @@
 package com.example.englishwordtts
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.englishwordtts.database.AppDatabase
 import com.example.englishwordtts.model.Word
 import kotlinx.coroutines.CoroutineScope
@@ -14,16 +11,35 @@ import kotlinx.coroutines.launch
 
 //TODO WordList.kt 에서 application 인수 전달 시 null값뜨는 오류 해결하기
 class WordListViewModel(application: Application) : AndroidViewModel(application) {
+    class Factory(val application: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return WordListViewModel(application) as T
+        }
+    }
     private val context = getApplication<Application>().applicationContext
+    private var appDatabase = AppDatabase.getInstance(context)?.getWordDao()
 
-    val mutableLiveData = MutableLiveData<List<Word>>()
+    val wordListMutableLiveData = MutableLiveData<List<Word>>()
     var words = ArrayList<Word>()
-    var appDatabase = AppDatabase.getInstance(context)?.getWordDao()
 
-    suspend fun getAllWordList(date : String){
+
+    fun getAllWordList(date : String){
         CoroutineScope(Dispatchers.IO).launch {
             words = appDatabase?.getWords(date) as ArrayList<Word>
-            mutableLiveData.value = words
+            wordListMutableLiveData.postValue(words)
+        }
+    }
+
+    fun insertWord(date: String,englishName : String, koreanName : String, isRememberCheck : Boolean){
+        CoroutineScope(Dispatchers.IO).launch {
+            val parentDate = appDatabase?.getDateByName("$date")
+            val newWord = Word(
+                parentDate = date,
+                englishName = englishName,
+                koreanName = koreanName,
+                isRememberCheck = isRememberCheck
+            )
+            appDatabase?.insertWord(newWord)
         }
     }
 

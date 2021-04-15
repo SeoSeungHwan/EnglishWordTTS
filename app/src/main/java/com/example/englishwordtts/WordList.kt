@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -17,13 +18,16 @@ import kotlinx.coroutines.launch
 
 class WordList : AppCompatActivity() {
 
+    //선택한 단어장 날짜
     var date = ""
-    var layoutManager : LinearLayoutManager?= null
-    companion object {
-        private const val TAG = "Test"
+
+    //viewModel 선언
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            WordListViewModel.Factory(application)
+        ).get(WordListViewModel::class.java)
     }
-    private var adapter : WordRecyclerViewAdapter? = null
-    private val appDataBase = AppDatabase.getInstance(this)?.getWordDao()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,39 +37,28 @@ class WordList : AppCompatActivity() {
         date = intent.getStringExtra("date").toString()
         totay_date_tv.text = date
 
-        //RecyclerView관련
-        layoutManager = LinearLayoutManager(
+        //RecyclerView에 사용되는 layoutManager
+        var layoutManager = LinearLayoutManager(
             this@WordList,
             RecyclerView.VERTICAL,
             false
         )
 
-
-        //TODO List<Word>불러오는 것 ViewModel로 빼기
-        CoroutineScope(Dispatchers.IO).launch {
-            val words = date?.let { appDataBase?.getWords(it) }
-            adapter = words?.let { WordRecyclerViewAdapter(it) }
+        //해당날짜에 해당하는 단어들 모두 가져오고 변화를 Livedata를 사용하여 관찰
+        viewModel.getAllWordList(date)
+        viewModel.wordListMutableLiveData.observe(this, Observer {
+            val adapter = WordRecyclerViewAdapter(it)
             wordlist_rv.layoutManager = layoutManager
             wordlist_rv.adapter = adapter
-        }
+        })
 
 
-
-        //단어 추가 버튼 클릭 시 Room 데이터 베이스에 저장
+        //단어 추가 버튼 클릭 시 Room 데이터 베이스에 저장 및 단어 다시 불러오기
         add_word_btn.setOnClickListener {
             var englishName = englishname_et.text.toString()
-            var koreanName =koreanname_et.text.toString()
-            CoroutineScope(Dispatchers.IO).launch {
-                val parentDate = appDataBase?.getDateByName("$date")
-                val newWord = Word(
-                    parentDate = parentDate?.date,
-                    englishName = englishName,
-                    koreanName = koreanName,
-                    isRememberCheck = false
-                )
-                appDataBase?.insertWord(newWord)
-                //TODO 데이터 삽입후 RecyclerView 갱신 구현
-            }
+            var koreanName = koreanname_et.text.toString()
+            viewModel.insertWord(date, englishName, koreanName, false)
+            viewModel.getAllWordList(date)
             clearEditText()
         }
     }
@@ -74,7 +67,4 @@ class WordList : AppCompatActivity() {
         englishname_et.text = null
         koreanname_et.text = null
     }
-
-
-
 }
