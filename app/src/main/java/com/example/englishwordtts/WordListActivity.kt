@@ -1,25 +1,40 @@
 package com.example.englishwordtts
 
+import android.app.Activity
+import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.IBinder
+import android.speech.tts.TextToSpeech
+import android.view.View
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import com.example.englishwordtts.database.AppDatabase
-import com.example.englishwordtts.model.Word
 import kotlinx.android.synthetic.main.activity_word_list.*
+import kotlinx.android.synthetic.main.date_list_item.view.*
 import kotlinx.android.synthetic.main.word_list_item.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.android.synthetic.main.word_list_item.view.*
+import java.util.*
 
-class WordList : AppCompatActivity() {
+//TODO 전체 재생눌렀을 경우 STREAM으로 만들어 모두 출력
+class WordListActivity : AppCompatActivity() {
 
     //선택한 단어장 날짜
     var date = ""
+
+    //tts
+    var tts: TextToSpeech? =null
+    private var reapeatTime: String = ""
+    private val handler = Handler()
+    private var handlerTask : Runnable? = null
+
 
     //viewModel 선언
     private val viewModel by lazy {
@@ -39,17 +54,33 @@ class WordList : AppCompatActivity() {
 
         //RecyclerView에 사용되는 layoutManager
         var layoutManager = LinearLayoutManager(
-            this@WordList,
+            this@WordListActivity,
             RecyclerView.VERTICAL,
             false
         )
+        //TTS Init
+        tts = TextToSpeech(this) {
+            if (it == TextToSpeech.SUCCESS) {
+                val result = tts?.setLanguage(Locale.KOREA)
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    return@TextToSpeech
+                }
+            } else {
+            }
+        }
 
         //해당날짜에 해당하는 단어들 모두 가져오고 변화를 Livedata를 사용하여 관찰
         viewModel.getAllWordList(date)
         viewModel.wordListMutableLiveData.observe(this, Observer {
-            val adapter = WordRecyclerViewAdapter(it)
+            val adapter = WordListRecyclerViewAdapter(it)
             wordlist_rv.layoutManager = layoutManager
             wordlist_rv.adapter = adapter
+
+            adapter?.itemClick = object : WordListRecyclerViewAdapter.ItemClick {
+                override fun onClick(view: View, position: Int) {
+                    //TODO 각 재생버튼 클릭시 재생버튼 추가
+                }
+            }
         })
 
 
@@ -58,7 +89,6 @@ class WordList : AppCompatActivity() {
             var englishName = englishname_et.text.toString()
             var koreanName = koreanname_et.text.toString()
             viewModel.insertWord(date, englishName, koreanName, false)
-            viewModel.getAllWordList(date)
             clearEditText()
         }
     }
@@ -67,4 +97,5 @@ class WordList : AppCompatActivity() {
         englishname_et.text = null
         koreanname_et.text = null
     }
+
 }

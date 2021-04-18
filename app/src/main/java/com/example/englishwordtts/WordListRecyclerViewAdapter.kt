@@ -7,14 +7,17 @@ import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.englishwordtts.model.DateList
 import com.example.englishwordtts.model.Word
 
-class WordRecyclerViewAdapter(private val dataSet : List<Word>) :
-    RecyclerView.Adapter<WordRecyclerViewAdapter.ViewHolder>() {
+class WordListRecyclerViewAdapter(private val dataSet : List<Word>) :
+    RecyclerView.Adapter<WordListRecyclerViewAdapter.ViewHolder>() {
 
     //TODO : 체크 박스 선택 시 선 긋고 아래로 내리기
-    //TODO : 각 재생버튼 onClick 리스너 구현
+    interface ItemClick{
+        fun onClick(view : View ,position: Int)
+    }
+    var itemClick : ItemClick? = null
+
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val englishName_tv : TextView
         val koreanName_tv : TextView
@@ -40,7 +43,11 @@ class WordRecyclerViewAdapter(private val dataSet : List<Word>) :
         holder.englishName_tv.text = dataSet[position].englishName
         holder.koreanName_tv.text = dataSet[position].koreanName
 
-
+        if(itemClick != null){
+            holder?.word_play_btn?.setOnClickListener {
+                itemClick?.onClick(it,position)
+            }
+        }
     }
 
     override fun getItemCount(): Int {

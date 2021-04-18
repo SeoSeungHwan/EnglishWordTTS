@@ -40,6 +40,7 @@ class WordListViewModel(application: Application) : AndroidViewModel(application
                 isRememberCheck = isRememberCheck
             )
             appDatabase?.insertWord(newWord)
+            getAllWordList(date)
         }
     }
 
