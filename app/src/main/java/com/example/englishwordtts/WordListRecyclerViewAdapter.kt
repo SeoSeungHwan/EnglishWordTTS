@@ -1,5 +1,7 @@
 package com.example.englishwordtts
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +50,14 @@ class WordListRecyclerViewAdapter(private val dataSet : List<Word>) :
                 itemClick?.onClick(it,position)
             }
         }
+
+        /*holder.word_cb.setTag(position)
+        holder.word_cb.setOnClickListener {
+            val cb :CheckBox = it as CheckBox
+            var pos = cb.getTag()
+            Log.d(TAG, "onBindViewHolder: " + pos)
+        }*/
+
     }
 
     override fun getItemCount(): Int {

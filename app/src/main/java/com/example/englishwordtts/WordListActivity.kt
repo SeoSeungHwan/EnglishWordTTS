@@ -1,27 +1,22 @@
 package com.example.englishwordtts
 
-import android.app.Activity
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.IBinder
 import android.speech.tts.TextToSpeech
 import android.view.View
-import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.englishwordtts.model.Word
 import kotlinx.android.synthetic.main.activity_word_list.*
 import kotlinx.android.synthetic.main.date_list_item.view.*
 import kotlinx.android.synthetic.main.word_list_item.*
 import kotlinx.android.synthetic.main.word_list_item.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 //TODO 전체 재생눌렀을 경우 STREAM으로 만들어 모두 출력
 class WordListActivity : AppCompatActivity() {
@@ -29,6 +24,8 @@ class WordListActivity : AppCompatActivity() {
     //선택한 단어장 날짜
     var date = ""
 
+    //선택된 체크박스 리스트
+    val selectCheckBoxItem = ArrayList<Word>()
     //tts
     var tts: TextToSpeech? =null
     private var reapeatTime: String = ""
@@ -90,6 +87,20 @@ class WordListActivity : AppCompatActivity() {
             var koreanName = koreanname_et.text.toString()
             viewModel.insertWord(date, englishName, koreanName, false)
             clearEditText()
+        }
+
+        //단어장 삭제 버튼 이벤트
+        remove_date_btn.setOnClickListener {
+            viewModel.deleteDate(date)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+
+        }
+
+        //선택한 단어들만 삭제하는 이벤트
+        select_remove_btn.setOnClickListener {
+
         }
     }
 

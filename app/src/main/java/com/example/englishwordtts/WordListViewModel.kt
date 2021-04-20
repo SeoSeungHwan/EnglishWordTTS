@@ -44,4 +44,10 @@ class WordListViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    fun deleteDate(date : String){
+        CoroutineScope(Dispatchers.IO).launch {
+            appDatabase?.deleteDate(date)
+        }
+    }
+
 }
