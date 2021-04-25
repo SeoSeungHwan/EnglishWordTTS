@@ -49,6 +49,8 @@ interface WordDao {
     @Query("DELETE FROM words")
     fun clearWords()
 
+    @Update
+    fun updateWord(word: Word)
 
     /*
     * 날짜와 영어관계 DAO

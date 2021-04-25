@@ -25,7 +25,7 @@ data class Word(
     val parentDate: String?,
     val englishName: String?,
     val koreanName:String?,
-    val isRememberCheck:Boolean?
+    var isRememberCheck:Boolean?
 )
 
 

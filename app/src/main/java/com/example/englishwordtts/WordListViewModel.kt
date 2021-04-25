@@ -17,7 +17,7 @@ class WordListViewModel(application: Application) : AndroidViewModel(application
         }
     }
     private val context = getApplication<Application>().applicationContext
-    private var appDatabase = AppDatabase.getInstance(context)?.getWordDao()
+    public var appDatabase = AppDatabase.getInstance(context)?.getWordDao()
 
     val wordListMutableLiveData = MutableLiveData<List<Word>>()
     var words = ArrayList<Word>()
@@ -40,6 +40,12 @@ class WordListViewModel(application: Application) : AndroidViewModel(application
                 isRememberCheck = isRememberCheck
             )
             appDatabase?.insertWord(newWord)
+            getAllWordList(date)
+        }
+    }
+    fun updateCheck(word : Word){
+        CoroutineScope(Dispatchers.IO).launch {
+            appDatabase?.updateWord(word)
         }
     }
 

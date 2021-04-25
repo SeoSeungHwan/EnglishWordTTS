@@ -42,6 +42,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 val newDate = DateList(date = date, count = 0)
                 appDatabase?.insertDate(newDate)
             }
+            getAllDate()
         }
     }
 
