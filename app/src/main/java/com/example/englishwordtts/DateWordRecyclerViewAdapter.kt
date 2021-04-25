@@ -9,8 +9,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.englishwordtts.model.DateList
 
-class MainRecyclerViewAdapter(private val dataSet : List<DateList>) :
-    RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>() {
+class DateWordRecyclerViewAdapter(private val dataSet : List<DateList>) :
+    RecyclerView.Adapter<DateWordRecyclerViewAdapter.ViewHolder>() {
 
 
     interface ItemClick{

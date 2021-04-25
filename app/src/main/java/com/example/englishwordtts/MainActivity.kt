@@ -37,6 +37,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        //오늘 단어 추가 클릭시 오늘날짜 DB에 저장
+        today_add_btn.setOnClickListener {
+            viewModel.getDateByName(LocalDate.now().toString())
+            val intent = Intent(this, WordList::class.java)
+            intent.putExtra("date", LocalDate.now().toString())
+            startActivity(intent)
+        }
+
+    }
+
+    @Override
+    override fun onStart() {
+        super.onStart()
+
         //RecyclerView의 LayoutManager
         val layoutManager = LinearLayoutManager(
             this@MainActivity,
@@ -58,15 +73,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
-
-        //오늘 단어 추가 클릭시 오늘날짜 DB에 저장
-        today_add_btn.setOnClickListener {
-            viewModel.getDateByName(LocalDate.now().toString())
-            val intent = Intent(this, WordList::class.java)
-            intent.putExtra("date", LocalDate.now().toString())
-            startActivity(intent)
-        }
-
     }
 }

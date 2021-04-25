@@ -1,6 +1,6 @@
 package com.example.englishwordtts
-
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.word_list_item.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class WordList : AppCompatActivity() {
 
@@ -45,8 +46,16 @@ class WordList : AppCompatActivity() {
         add_word_btn.setOnClickListener {
             var englishName = englishname_et.text.toString()
             var koreanName = koreanname_et.text.toString()
-            viewModel.insertWord(date, englishName, koreanName, true)
+            viewModel.insertWord(date, englishName, koreanName, false)
             clearEditText()
+        }
+
+        remove_date_btn.setOnClickListener {
+            viewModel.removeWordList(date)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+
         }
     }
 
@@ -69,7 +78,7 @@ class WordList : AppCompatActivity() {
         //해당날짜에 해당하는 단어들 모두 가져오고 변화를 Livedata를 사용하여 관찰
         viewModel.getAllWordList(date)
         viewModel.wordListMutableLiveData.observe(this, Observer {
-            val adapter = WordRecyclerViewAdapter(it,viewModel)
+            val adapter = WordRecyclerViewAdapter(it)
             wordlist_rv.layoutManager = layoutManager
             wordlist_rv.adapter = adapter
             adapter?.itemChange = object : WordRecyclerViewAdapter.ItemChange {
