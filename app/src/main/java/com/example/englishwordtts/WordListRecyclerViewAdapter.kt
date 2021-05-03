@@ -1,7 +1,9 @@
 package com.example.englishwordtts
 
+import android.content.ContentValues.TAG
 import android.graphics.Color
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,13 +49,17 @@ class WordRecyclerViewAdapter(private val dataSet : List<Word>) :
         holder.englishName_tv.text = dataSet[position].englishName
         holder.koreanName_tv.text = dataSet[position].koreanName
 
-        fun textViewDesignChange(){
+        //true인건 체크박스가 체크되어있게 함
+        holder.word_cb.setOnCheckedChangeListener(null)
+        Log.d(TAG, "sibal id :" +dataSet[position].wordId)
+        holder.word_cb.isChecked = dataSet[position].isRememberCheck == true
+
+        fun checkboxStyleChange(){
             if(holder.word_cb.isChecked ==true){
                 holder.englishName_tv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-                holder.koreanName_tv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 holder.englishName_tv.setTextColor(Color.GRAY)
+                holder.koreanName_tv.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 holder.koreanName_tv.setTextColor(Color.GRAY)
-
             }else{
                 holder.englishName_tv.paintFlags =0
                 holder.koreanName_tv.paintFlags = 0
@@ -61,23 +67,22 @@ class WordRecyclerViewAdapter(private val dataSet : List<Word>) :
                 holder.koreanName_tv.setTextColor(Color.WHITE)
             }
         }
-        //true인건 체크박스가 체크되어있게 함
-        holder.word_cb.setOnCheckedChangeListener(null)
-        holder.word_cb.isChecked = dataSet[position].isRememberCheck == true
 
         //체크박스가 체크되어있으면 글씨에 선을 그어 줌
-        textViewDesignChange()
+        checkboxStyleChange()
+
         if(itemChange != null){
             holder.word_cb.setOnCheckedChangeListener { buttonView, isChecked ->
                 itemChange?.onChange(buttonView,isChecked , dataSet[position])
-                //체크박스가 체크되어있으면 글씨에 선을 그어 줌
-                textViewDesignChange()
+                checkboxStyleChange()
             }
         }
+
     }
 
     override fun getItemCount(): Int {
         return dataSet.size
     }
+
 
 }

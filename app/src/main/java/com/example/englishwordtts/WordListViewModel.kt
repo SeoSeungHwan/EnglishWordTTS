@@ -53,8 +53,12 @@ class WordListViewModel(application: Application) : AndroidViewModel(application
     fun removeWordList(date : String){
         CoroutineScope(Dispatchers.IO).launch {
             appDatabase?.deleteDate(date)
-        };
-
+        }
     }
-
+    fun removeSelectWord(date :String, wordId : Int){
+        CoroutineScope(Dispatchers.IO).launch {
+            appDatabase?.deleteWord(wordId)
+            getAllWordList(date)
+        }
+    }
 }

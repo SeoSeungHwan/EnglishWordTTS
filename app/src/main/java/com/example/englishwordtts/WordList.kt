@@ -57,6 +57,15 @@ class WordList : AppCompatActivity() {
             startActivity(intent)
 
         }
+
+        select_remove_btn.setOnClickListener {
+            viewModel.words.forEach {
+                if (it.isRememberCheck==true){
+                    viewModel.removeSelectWord(date, it.wordId)
+                }
+            }
+
+        }
     }
 
     fun clearEditText() {
