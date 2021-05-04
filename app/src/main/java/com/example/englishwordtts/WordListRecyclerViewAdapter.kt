@@ -17,11 +17,15 @@ import com.example.englishwordtts.model.Word
 class WordRecyclerViewAdapter(private val dataSet : List<Word>) :
     RecyclerView.Adapter<WordRecyclerViewAdapter.ViewHolder>() {
 
-    //TODO : 체크 박스 선택 시 선 긋고 아래로 내리기
     interface ItemChange{
         fun onChange(buttonView : CompoundButton, isChecked: Boolean, word :Word)
     }
     var itemChange : ItemChange? = null
+
+    interface ItemClick{
+        fun onClick(view : View ,position: Int)
+    }
+    var itemClick : ItemClick? = null
 
     //TODO : 각 재생버튼 onClick 리스너 구현
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -51,7 +55,6 @@ class WordRecyclerViewAdapter(private val dataSet : List<Word>) :
 
         //true인건 체크박스가 체크되어있게 함
         holder.word_cb.setOnCheckedChangeListener(null)
-        Log.d(TAG, "sibal id :" +dataSet[position].wordId)
         holder.word_cb.isChecked = dataSet[position].isRememberCheck == true
 
         fun checkboxStyleChange(){
@@ -75,6 +78,12 @@ class WordRecyclerViewAdapter(private val dataSet : List<Word>) :
             holder.word_cb.setOnCheckedChangeListener { buttonView, isChecked ->
                 itemChange?.onChange(buttonView,isChecked , dataSet[position])
                 checkboxStyleChange()
+            }
+        }
+
+        if(itemClick != null){
+            holder?.word_play_btn?.setOnClickListener {
+                itemClick?.onClick(it,position)
             }
         }
 

@@ -1,11 +1,14 @@
 package com.example.englishwordtts
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.widget.CompoundButton
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +22,9 @@ import kotlinx.android.synthetic.main.word_list_item.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 import java.time.LocalDate
+import java.util.*
 
 class WordList : AppCompatActivity() {
 
@@ -34,9 +39,25 @@ class WordList : AppCompatActivity() {
         ).get(WordListViewModel::class.java)
     }
 
+    //tts
+    private var tts : TextToSpeech? =null
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_list)
+
+
+        //TTS Init
+        tts = TextToSpeech(this) {
+            if (it == TextToSpeech.SUCCESS) {
+                val result = tts?.setLanguage(Locale.ENGLISH)
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    return@TextToSpeech
+                }
+            } else {
+            }
+        }
 
         //선택 날짜
         date = intent.getStringExtra("date").toString()
@@ -50,6 +71,7 @@ class WordList : AppCompatActivity() {
             clearEditText()
         }
 
+        //해당날짜 단어장 모두 삭제
         remove_date_btn.setOnClickListener {
             viewModel.removeWordList(date)
             val intent = Intent(this, MainActivity::class.java)
@@ -58,14 +80,24 @@ class WordList : AppCompatActivity() {
 
         }
 
+        //선택된 단어들 삭제
         select_remove_btn.setOnClickListener {
             viewModel.words.forEach {
                 if (it.isRememberCheck==true){
                     viewModel.removeSelectWord(date, it.wordId)
                 }
             }
+        }
+
+        //TODO 선택한단어들 모두 재생
+        select_play_btn.setOnClickListener {
+            tts?.speak("test",TextToSpeech.QUEUE_FLUSH,null,null)
+        }
+        //TODO 모든단어 재생
+        all_play_btn.setOnClickListener {
 
         }
+
     }
 
     fun clearEditText() {
@@ -90,17 +122,25 @@ class WordList : AppCompatActivity() {
             val adapter = WordRecyclerViewAdapter(it)
             wordlist_rv.layoutManager = layoutManager
             wordlist_rv.adapter = adapter
+
+            //각 단어 체크시 체크여부 Update
             adapter?.itemChange = object : WordRecyclerViewAdapter.ItemChange {
                 override fun onChange(buttonView: CompoundButton, isChecked: Boolean , word: Word) {
 
                     var newWord = word
                     newWord.isRememberCheck = isChecked
-                    Log.d("sibal", "onChange: ${word.isRememberCheck}")
                     viewModel.updateCheck(newWord)
                 }
             }
-        })
 
+            //각 단어 재생클릭시 영단어 읽어주기
+            adapter?.itemClick = object : WordRecyclerViewAdapter.ItemClick {
+                @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+                override fun onClick(view: View, position: Int) {
+                    tts?.speak(it.get(position).englishName.toString(),TextToSpeech.QUEUE_FLUSH,null,null)
+                }
+            }
+        })
 
     }
 }

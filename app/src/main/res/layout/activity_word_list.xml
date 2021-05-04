@@ -44,7 +44,11 @@
             android:id="@+id/add_word_btn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="추가" />
+            android:text="추가"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_custom3"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="영단어"
-                android:inputType="text" />
+                android:inputType="text"
+                android:privateImeOptions="defaultInputmode=english"/>
 
             <EditText
                 android:id="@+id/koreanname_et"
@@ -65,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="뜻"
+                android:privateImeOptions="defaultInputmode=korean"
                 android:inputType="text" />
 
         </LinearLayout>
