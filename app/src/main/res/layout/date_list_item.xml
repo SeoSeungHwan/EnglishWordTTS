@@ -14,8 +14,8 @@
         android:id="@+id/date_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:text="날짜"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -27,22 +27,12 @@
         android:id="@+id/word_list_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
         android:background="@null"
         android:src="@drawable/ic_baseline_list_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/count_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="단어개수"
-        android:textColor="@color/subTextColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/word_list_btn"
-        app:layout_constraintStart_toEndOf="@+id/date_tv"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

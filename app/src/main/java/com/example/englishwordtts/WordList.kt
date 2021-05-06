@@ -88,16 +88,6 @@ class WordList : AppCompatActivity() {
                 }
             }
         }
-
-        //TODO 선택한단어들 모두 재생
-        select_play_btn.setOnClickListener {
-            tts?.speak("test",TextToSpeech.QUEUE_FLUSH,null,null)
-        }
-        //TODO 모든단어 재생
-        all_play_btn.setOnClickListener {
-
-        }
-
     }
 
     fun clearEditText() {

@@ -20,12 +20,10 @@ class DateWordRecyclerViewAdapter(private val dataSet : List<DateList>) :
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val date_tv : TextView
-        val count_tv : TextView
         val word_list_btn : ImageButton
         val date_list_item_cl : ConstraintLayout
         init{
             date_tv = view.findViewById(R.id.date_tv)
-            count_tv = view.findViewById(R.id.count_tv)
             word_list_btn = view.findViewById(R.id.word_list_btn)
             date_list_item_cl = view.findViewById(R.id.date_list_item_cl)
 
@@ -42,8 +40,7 @@ class DateWordRecyclerViewAdapter(private val dataSet : List<DateList>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.date_tv.text = dataSet[position].date
-        holder.count_tv.text = dataSet[position].count.toString()+"개"
+        holder.date_tv.text = dataSet[position].date+" 단어장"
 
         if(itemClick != null){
             holder?.itemView?.setOnClickListener {

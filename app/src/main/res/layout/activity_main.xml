@@ -25,7 +25,7 @@
             android:button="@null"
             android:checked="true"
             android:gravity="center"
-            android:text="날짜순"
+            android:text="최신순"
             android:textSize="15sp" />
 
         <RadioButton
@@ -36,7 +36,7 @@
             android:background="@drawable/radio_button_left_selector"
             android:button="@null"
             android:gravity="center"
-            android:text="재생순"
+            android:text="오래된순"
             android:textSize="15sp" />
     </RadioGroup>
 

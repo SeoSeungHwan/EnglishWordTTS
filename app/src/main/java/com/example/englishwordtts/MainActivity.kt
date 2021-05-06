@@ -1,24 +1,18 @@
 package com.example.englishwordtts
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import com.example.englishwordtts.database.AppDatabase
-import com.example.englishwordtts.model.DateList
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.date_list_item.view.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.*
 
@@ -46,6 +40,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        radioGroup.setOnCheckedChangeListener { radioGroup, i ->
+            if(i ==R.id.radioButton){
+                viewModel.getAllDateRecent()
+                Log.d(ContentValues.TAG, "getDateByName: 1")
+            }else if(i ==R.id.radioButton2){
+                viewModel.getAllDateOldest()
+                Log.d(ContentValues.TAG, "getDateByName: 2")
+            }
+        }
+
     }
 
     @Override
@@ -60,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         //날짜별 단어장 목록 가져오고 Livedata로 변화를 관찰
-        viewModel.getAllDate()
+        viewModel.getAllDateRecent()
         viewModel.dateListMutableLiveData.observe(this, androidx.lifecycle.Observer {
             adapter = DateWordRecyclerViewAdapter(it)
             dateword_rv.layoutManager = layoutManager
