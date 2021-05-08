@@ -12,12 +12,12 @@ data class DateList(
 @Entity(
     tableName = "words",
     foreignKeys = [
-    ForeignKey(
-        entity = DateList::class,
-        parentColumns = arrayOf("date"),
-        childColumns = arrayOf("parentDate"),
-        onDelete = ForeignKey.CASCADE
-    )]
+        ForeignKey(
+            entity = DateList::class,
+            parentColumns = arrayOf("date"),
+            childColumns = arrayOf("parentDate"),
+            onDelete = ForeignKey.CASCADE
+        )]
 )
 data class Word(
     @PrimaryKey(autoGenerate = true)

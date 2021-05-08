@@ -28,8 +28,6 @@ class DateWordRecyclerViewAdapter(private val dataSet : List<DateList>) :
             date_list_item_cl = view.findViewById(R.id.date_list_item_cl)
 
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,7 +38,7 @@ class DateWordRecyclerViewAdapter(private val dataSet : List<DateList>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.date_tv.text = dataSet[position].date+" 단어장"
+        holder.date_tv.text = dataSet[position].date
 
         if(itemClick != null){
             holder?.itemView?.setOnClickListener {
