@@ -5,7 +5,7 @@
     <application
         android:allowBackup="false"
         android:icon="@drawable/icon"
-        android:label="음성 영단어장"
+        android:label="음성 단어장"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EnglishWordTTS">

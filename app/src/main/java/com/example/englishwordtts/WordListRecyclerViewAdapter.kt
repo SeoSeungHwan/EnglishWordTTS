@@ -66,8 +66,8 @@ class WordRecyclerViewAdapter(private val dataSet : List<Word>) :
             }else{
                 holder.englishName_tv.paintFlags =0
                 holder.koreanName_tv.paintFlags = 0
-                holder.englishName_tv.setTextColor(Color.WHITE)
-                holder.koreanName_tv.setTextColor(Color.WHITE)
+                holder.englishName_tv.setTextColor(Color.BLACK)
+                holder.koreanName_tv.setTextColor(Color.BLACK)
             }
         }
 

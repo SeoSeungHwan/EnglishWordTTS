@@ -28,7 +28,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
 
-    fun getAllDateRecent(){
+    fun getAllDateOldest(){
         CoroutineScope(Dispatchers.IO).launch {
             words = appDatabase.getDate() as ArrayList<DateList>
             words.sortBy { it.date }
@@ -36,7 +36,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getAllDateOldest(){
+    fun getAllDateRecent(){
         CoroutineScope(Dispatchers.IO).launch {
             words = appDatabase.getDate() as ArrayList<DateList>
             words.sortBy { it.date }

@@ -41,8 +41,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Word"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/koreanname_tv"
@@ -51,7 +52,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="의미"
-            android:textColor="@color/subTextColor"
+            android:textColor="@color/black"
             android:textSize="18sp" />
 
     </LinearLayout>

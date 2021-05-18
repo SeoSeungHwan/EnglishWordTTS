@@ -43,10 +43,8 @@ class MainActivity : AppCompatActivity() {
         radioGroup.setOnCheckedChangeListener { radioGroup, i ->
             if(i ==R.id.radioButton){
                 viewModel.getAllDateRecent()
-                Log.d(ContentValues.TAG, "getDateByName: 1")
             }else if(i ==R.id.radioButton2){
                 viewModel.getAllDateOldest()
-                Log.d(ContentValues.TAG, "getDateByName: 2")
             }
         }
 

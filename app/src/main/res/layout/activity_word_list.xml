@@ -25,7 +25,7 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:background="@color/mainColor"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +87,7 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/button_custom2"
         android:text="단어장 삭제"
-        android:textColor="#ffffff"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/totay_date_tv"
         app:layout_constraintEnd_toEndOf="@+id/totay_date_tv"
         app:layout_constraintTop_toTopOf="parent" />
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_custom2"
-            android:textColor="#ffffff"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:text="선택삭제" />
 
