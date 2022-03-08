@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EnglishWordTTS</string>
+
+    <!--Admob-->
+    <string name="banner">ca-app-pub-5086679279657695/1554690446</string>
+    <string name="banner_test">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

@@ -1,11 +1,10 @@
-package com.example.englishwordtts
+package com.gilson.englishwordtts
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
-import android.util.Log
 import android.view.View
 import android.widget.CompoundButton
 import androidx.annotation.RequiresApi
@@ -13,17 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import com.example.englishwordtts.database.AppDatabase
-import com.example.englishwordtts.model.Word
+import com.gilson.englishwordtts.model.Word
 import kotlinx.android.synthetic.main.activity_word_list.*
-import kotlinx.android.synthetic.main.date_list_item.view.*
-import kotlinx.android.synthetic.main.word_list_item.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.w3c.dom.Text
-import java.time.LocalDate
 import java.util.*
 
 class WordList : AppCompatActivity() {

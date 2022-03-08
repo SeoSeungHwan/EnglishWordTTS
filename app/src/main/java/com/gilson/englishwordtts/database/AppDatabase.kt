@@ -1,11 +1,11 @@
-package com.example.englishwordtts.database
+package com.gilson.englishwordtts.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.englishwordtts.model.DateList
-import com.example.englishwordtts.model.Word
+import com.gilson.englishwordtts.model.DateList
+import com.gilson.englishwordtts.model.Word
 
 @Database(
     entities = [DateList::class, Word::class],

@@ -1,4 +1,4 @@
-package com.example.englishwordtts
+package com.gilson.englishwordtts
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.englishwordtts.model.DateList
+import com.gilson.englishwordtts.model.DateList
 
 class DateWordRecyclerViewAdapter(private val dataSet : List<DateList>) :
     RecyclerView.Adapter<DateWordRecyclerViewAdapter.ViewHolder>() {

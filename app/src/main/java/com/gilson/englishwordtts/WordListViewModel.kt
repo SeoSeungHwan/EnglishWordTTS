@@ -1,9 +1,9 @@
-package com.example.englishwordtts
+package com.gilson.englishwordtts
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.englishwordtts.database.AppDatabase
-import com.example.englishwordtts.model.Word
+import com.gilson.englishwordtts.database.AppDatabase
+import com.gilson.englishwordtts.model.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

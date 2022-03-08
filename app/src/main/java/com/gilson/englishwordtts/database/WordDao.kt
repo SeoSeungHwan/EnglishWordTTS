@@ -1,10 +1,9 @@
-package com.example.englishwordtts.database
+package com.gilson.englishwordtts.database
 
 import androidx.room.*
-import com.example.englishwordtts.model.DateAndWord
-import com.example.englishwordtts.model.DateList
-import com.example.englishwordtts.model.Word
-import java.util.*
+import com.gilson.englishwordtts.model.DateAndWord
+import com.gilson.englishwordtts.model.DateList
+import com.gilson.englishwordtts.model.Word
 
 @Dao
 interface WordDao {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.englishwordtts">
+    package="com.gilson.englishwordtts">
 
     <application
         android:allowBackup="false"
@@ -9,8 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EnglishWordTTS">
-        <activity android:name=".WordList"></activity>
-        <activity android:name=".MainActivity">
+
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5086679279657695~6977890594"/>
+
+        <activity android:name="com.gilson.englishwordtts.WordList"></activity>
+        <activity android:name="com.gilson.englishwordtts.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

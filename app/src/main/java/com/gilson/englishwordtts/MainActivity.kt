@@ -1,20 +1,20 @@
-package com.example.englishwordtts
+package com.gilson.englishwordtts
 
-import android.content.ContentValues
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.date_list_item.view.*
 import java.time.LocalDate
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,6 +47,12 @@ class MainActivity : AppCompatActivity() {
                 viewModel.getAllDateOldest()
             }
         }
+
+        //Admob 초기화 및 load
+        MobileAds.initialize(this) {}
+        val adView = findViewById<AdView>(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
 
     }
 

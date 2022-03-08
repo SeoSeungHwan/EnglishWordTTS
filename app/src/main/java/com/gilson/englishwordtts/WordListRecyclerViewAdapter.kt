@@ -1,9 +1,7 @@
-package com.example.englishwordtts
+package com.gilson.englishwordtts
 
-import android.content.ContentValues.TAG
 import android.graphics.Color
 import android.graphics.Paint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,7 @@ import android.widget.CompoundButton
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.englishwordtts.model.Word
+import com.gilson.englishwordtts.model.Word
 
 class WordRecyclerViewAdapter(private val dataSet : List<Word>) :
     RecyclerView.Adapter<WordRecyclerViewAdapter.ViewHolder>() {

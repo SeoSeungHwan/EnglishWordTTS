@@ -1,14 +1,12 @@
-package com.example.englishwordtts
+package com.gilson.englishwordtts
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.englishwordtts.database.AppDatabase
-import com.example.englishwordtts.model.DateList
-import com.example.englishwordtts.model.Word
+import com.gilson.englishwordtts.database.AppDatabase
+import com.gilson.englishwordtts.model.DateList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 
 
 //TODO WordList.kt 에서 application 인수 전달 시 null값뜨는 오류 해결하기

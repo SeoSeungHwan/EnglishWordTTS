@@ -1,4 +1,4 @@
-package com.example.englishwordtts.model
+package com.gilson.englishwordtts.model
 
 import androidx.room.*
 
